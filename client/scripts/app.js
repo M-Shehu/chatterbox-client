@@ -20,8 +20,30 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
+      
+      var messageArr = data.results;
       console.log(data);
+      for (var i = 0; i < messageArr.length; i++) {
+        var message = {
+          username: null,
+          text: null,
+          roomname: null
+        };
+        message['username'] = messageArr[i].username;
+        message['text'] = messageArr[i].text;
+        message['roomname'] = messageArr[i].roomname;
+        // message[messageArr[i].username] = messageArr[i].text;
+        if (Array.isArray(roomStorage[messageArr[i].roomname])) {
+          roomStorage[messageArr[i].roomname].push(message);
+        } else {
+          roomStorage[messageArr[i].roomname] = [];
+          roomStorage[messageArr[i].roomname].push(message);
+        }
 
+      }
+      console.log(roomStorage);
+      RoomsView.render();
+      
       callback();
     });
   },
