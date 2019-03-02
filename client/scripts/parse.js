@@ -2,7 +2,7 @@ var Parse = {
 
   server: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
 
-  create: function(message, successCB, errorCB = null) {
+  create: function(message, successCB, errorCB) {
     $.ajax({
       // Called everytime we want to send messages to the server
       url: Parse.server,

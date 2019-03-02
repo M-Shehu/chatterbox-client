@@ -9,13 +9,14 @@ var FormView = {
     
     // FormView.$form.on('message', )
     // console.log($("#message").val());
-    console.log(window.location.search.slice(10));
+    // console.log(window.location.search.slice(10));
+
+
 
   },
 
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
-    // event.preventDefault();
     var message = {
       username: null,
       text: null,
@@ -23,20 +24,26 @@ var FormView = {
     };
     message.text = $("#message").val(); 
     message.username = window.location.search.slice(10);
-    // message.roomname = $(".selectRoom").value;
-    // save to messages storage
-    Parse.create(message);
-    Messages[message.text] = message;
-    // want to send the message to the server
-    // want to post to the screen by calling meesageView.js
-    MessageView.render(message);
+    message.roomname = $(".selectRoom").children("option:selected").text();
     
+    // want to send the message to the server
+    Parse.create(message);
+    // save to messages storage
+    Messages[message.text] = message;
+    // want to post to the screen by calling messageView.js
+    MessagesView.addToScreen(message);
+    // debugger;
+    event.preventDefault();
     console.log('click!');
   },
 
   setStatus: function(active) {
     var status = active ? 'true' : null;
     FormView.$form.find('input[type=submit]').attr('disabled', status);
-  }
+  }, 
 
+  render: function(room) {
+    MessagesView.clear();
+    MessagesView.render();
+  }
 };

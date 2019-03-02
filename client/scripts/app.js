@@ -14,6 +14,9 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
+    
+    // Populate the views
+    FormView.render();
 
   },
 
@@ -29,9 +32,12 @@ var App = {
           text: null,
           roomname: null
         };
-        message['username'] = messageArr[i].username;
-        message['text'] = messageArr[i].text;
-        message['roomname'] = messageArr[i].roomname;
+        
+        
+        
+        message['username'] = _.escape(messageArr[i].username);
+        message['text'] = _.escape(messageArr[i].text);
+        message['roomname'] = _.escape(messageArr[i].roomname);
         // message[messageArr[i].username] = messageArr[i].text;
         if (Array.isArray(roomStorage[messageArr[i].roomname])) {
           roomStorage[messageArr[i].roomname].push(message);
@@ -42,7 +48,8 @@ var App = {
 
       }
       console.log(roomStorage);
-      RoomsView.render();
+      RoomsView.selectWheelRender();
+      FormView.render();
       
       callback();
     });
