@@ -14,10 +14,12 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-    
-    // Populate the views
-    FormView.render();
 
+    // setInterval(function(){ 
+    //   roomStorage = {};
+    //   App.fetch(App.stopSpinner); 
+    // }, 10000);
+    
   },
 
   fetch: function(callback = ()=>{}) {
@@ -33,8 +35,6 @@ var App = {
           roomname: null
         };
         
-        
-        
         message['username'] = _.escape(messageArr[i].username);
         message['text'] = _.escape(messageArr[i].text);
         message['roomname'] = _.escape(messageArr[i].roomname);
@@ -49,7 +49,7 @@ var App = {
       }
       console.log(roomStorage);
       RoomsView.selectWheelRender();
-      FormView.render();
+      MessagesView.render();
       
       callback();
     });

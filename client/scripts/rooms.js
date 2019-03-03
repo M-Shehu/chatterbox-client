@@ -1,6 +1,6 @@
 var Rooms = function() {
     this.storage = {};
-    this.add;
+    this.add; // learn was asking to use this method. Implement later
 };
 
 var allRooms = new Rooms();
