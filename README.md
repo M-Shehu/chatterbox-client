@@ -1,2 +1,8 @@
-# chatterbox-client
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+# Chatterbox - Client
+
+## Project Description
+Client for a simple chat-room app.
+
+## License
+
+This app is MIT licensed.
